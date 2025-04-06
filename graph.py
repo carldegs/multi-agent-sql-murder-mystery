@@ -245,6 +245,10 @@ Response Format:
 - Summarize what was learned from the SQL results. List down any new information, clues, or evidence discovered.
 - Mention individuals with their name and ID when first introduced.
 - If a suspect is identified but not yet interviewed, include a clear note: "**[Name] (ID) has not yet been interviewed.**"
+
+### Possible Next Steps
+- Suggest what the next step in the investigation could be based on the findings.
+- If there are any leads from the previous turn that's not yet followed up, mention them here.
 ```
 
 Important Rules:
