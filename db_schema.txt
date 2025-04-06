@@ -1,0 +1,93 @@
+<database>
+    <tables>
+        <table name="crime_scene_report">
+            <sql>CREATE TABLE crime_scene_report (
+                date integer,
+                type text,
+                description text,
+                city text
+            )</sql>
+            <description>Contains details about reported crimes, including the date, type, location, and description of the incident.</description>
+        </table>
+        <table name="drivers_license">
+            <sql>CREATE TABLE drivers_license (
+                id integer PRIMARY KEY,
+                age integer,
+                height integer,
+                eye_color text,
+                hair_color text,
+                gender text,
+                plate_number text,
+                car_make text,
+                car_model text
+            )</sql>
+            <description>Contains driver details, including age, height, eye color, hair color, gender, and vehicle information (plate number, make, and model).</description>
+        </table>
+        <table name="facebook_event_checkin">
+            <sql>CREATE TABLE facebook_event_checkin (
+                person_id integer,
+                event_id integer,
+                event_name text,
+                date integer,
+                FOREIGN KEY (person_id) REFERENCES person(id)
+            )</sql>
+            <description>Tracks people attending public events, storing event names, dates, and attendees.</description>
+        </table>
+        <table name="interview">
+            <sql>CREATE TABLE interview (
+                person_id integer,
+                transcript text,
+                FOREIGN KEY (person_id) REFERENCES person(id)
+            )</sql>
+            <description>Records statements from witnesses or suspects, linking them to the case via person_id.</description>
+        </table>
+        <table name="get_fit_now_member">
+            <sql>CREATE TABLE get_fit_now_member (
+                id text PRIMARY KEY,
+                person_id integer,
+                name text,
+                membership_start_date integer,
+                membership_status text,
+                FOREIGN KEY (person_id) REFERENCES person(id)
+            )</sql>
+            <description>Lists gym members with their ID, name, membership start date, and status (e.g., gold, silver).</description>
+        </table>
+        <table name="get_fit_now_check_in">
+            <sql>CREATE TABLE get_fit_now_check_in (
+                membership_id text,
+                check_in_date integer,
+                check_in_time integer,
+                check_out_time integer,
+                FOREIGN KEY (membership_id) REFERENCES get_fit_now_member(id)
+            )</sql>
+            <description>Logs gym attendance, tracking which members worked out on a specific date.</description>
+        </table>
+        <table name="solution">
+            <sql>CREATE TABLE solution (
+                user integer,
+                value text
+            )</sql>
+            <description>Used for submitting answers in the SQL murder mystery challenge.</description>
+        </table>
+        <table name="income">
+            <sql>CREATE TABLE income (
+                ssn CHAR PRIMARY KEY,
+                annual_income integer
+            )</sql>
+            <description>Stores income details, including SSN and annual income.</description>
+        </table>
+        <table name="person">
+            <sql>CREATE TABLE person (
+                id integer PRIMARY KEY,
+                name text,
+                license_id integer,
+                address_number integer,
+                address_street_name text,
+                ssn CHAR REFERENCES income (ssn),
+                FOREIGN KEY (license_id) REFERENCES drivers_license (id)
+            )</sql>
+            <description>Stores personal details such as name, address, SSN, and license ID for individuals in SQL City.</description>
+        </table>
+    </tables>
+</database>
+

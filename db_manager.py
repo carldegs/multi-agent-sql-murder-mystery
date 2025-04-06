@@ -4,6 +4,7 @@ class DatabaseManager:
     def __init__(self, db_file):
         self.db_file = db_file
         self.connection = None
+        self.db_schema = None
 
     def connect(self):
         self.connection = sqlite3.connect(self.db_file)
